@@ -1,17 +1,16 @@
-﻿using Xamarin.Forms;
-
+﻿
 namespace TravelMonkey.Models
 {
     public class AddPictureResult
     {
         public string Description { get; }
         public string LandmarkDescription { get; }
-        public Color AccentColor { get; }
-        public bool Succeeded => !string.IsNullOrEmpty(Description) && AccentColor != Color.Default;
+        public string AccentColor { get; }
+        public bool Succeeded => !string.IsNullOrEmpty(Description) && !string.IsNullOrEmpty(AccentColor) ;
 
         public AddPictureResult() { }
 
-        public AddPictureResult(string description, Color accentColor, string landmarkDescription = "")
+        public AddPictureResult(string description, string accentColor, string landmarkDescription = "")
         {
             Description = $"I see {description}";
             AccentColor = accentColor;

@@ -1,0 +1,20 @@
+﻿@page "/"
+
+@if (VM.CurrentDestination == null)
+{
+    <p>loading this should be a monkey</p>
+}
+else
+{
+    <h1>Hi there,</h1>
+    <h1>Where do you want to go?</h1>
+
+    <img class="carousel" src="@VM.CurrentDestination.ImageUrl" />
+    <p>@VM.CurrentDestination.Title</p>
+    <EditForm Model="VM.CurrentDestination">
+        <MatTextField @bind-Value="VM.TranslateText"></MatTextField>
+        <p class="validation-message">@VM.ErrorMessage</p>
+    </EditForm>
+    <MatButton OnClick="Translate">Translate</MatButton>
+    <MatButton OnClick="AddPicture">AddImage</MatButton>
+}

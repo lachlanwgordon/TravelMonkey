@@ -1,0 +1,16 @@
+﻿@page "/translation/{Text}"
+@page "/translation"
+
+<h1>@Text</h1>
+
+@if (VM == null || VM.Translations == null)
+{
+    <p>loading</p>
+}
+else
+{
+    @foreach (var translation in VM.Translations)
+    {
+        <p>@translation.Key : @translation.Value</p>
+    }
+}

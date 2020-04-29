@@ -1,0 +1,10 @@
+﻿@page "/addpicture"
+
+<h1>Add picture</h1>
+
+<p class="validation-message">@VM.ErrorMessage</p>
+<h2>@VM.PictureDescription</h2>
+
+<InputFile OnChange="HandleFileSelected" />
+<p>@FileName</p>
+

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
 using TravelMonkey.Services;
-using Xamarin.Forms;
 
 namespace TravelMonkey.ViewModels
 {
@@ -20,9 +22,9 @@ namespace TravelMonkey.ViewModels
                 if (_inputText == value)
                     return;
 
-                Set(ref _inputText, value);
+                SetProperty(ref _inputText, value);
 
-                TranslateText();
+                TranslateText(value);
             }
         }
 
@@ -31,7 +33,7 @@ namespace TravelMonkey.ViewModels
             get => _translations;
             set
             {
-                Set(ref _translations, value);
+                SetProperty(ref _translations, value);
             }
         }
 
@@ -40,12 +42,18 @@ namespace TravelMonkey.ViewModels
             InputText = inputText;
         });
 
-        private async void TranslateText()
+        public string ErrorMessage { get; private set; }
+
+        public async Task TranslateText(string text)
         {
-            var result = await _translationService.TranslateText(_inputText);
+            var result = await _translationService.TranslateText(text);
 
             if (!result.Succeeded)
-                MessagingCenter.Send(this, Constants.TranslationFailedMessage);
+            {
+                //MessagingCenter.Send(this, Constants.TranslationFailedMessage);
+                //TODO: what is this?
+                ErrorMessage = "Failed to translate";
+            }
 
             Translations = result.Translations;
         }

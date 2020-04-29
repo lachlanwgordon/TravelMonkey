@@ -18,17 +18,14 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.442" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="5.0.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Search.ImageSearch" Version="2.0.0" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.1-beta" />
+    
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
     <Folder Include="Effects\" />
     <Folder Include="Views\" />
-    <Folder Include="Services\" />
-    <Folder Include="Data\" />
-    <Folder Include="Models\CognitiveServices\" />
     <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
@@ -50,5 +47,8 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TravelMonkey.Core\TravelMonkey.Core.csproj" />
   </ItemGroup>
 </Project>

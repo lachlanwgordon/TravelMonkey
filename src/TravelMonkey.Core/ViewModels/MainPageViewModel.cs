@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Timers;
+using MvvmHelpers;
+using MvvmHelpers.Commands;
 using TravelMonkey.Data;
 using TravelMonkey.Models;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace TravelMonkey.ViewModels
 {
     public class MainPageViewModel : BaseViewModel
     {
         private readonly Timer _slideShowTimer = new Timer(5000);
-
+        public string TranslateText { get; set; }
         public List<Destination> Destinations => MockDataStore.Destinations;
         public ObservableCollection<PictureEntry> Pictures => MockDataStore.Pictures;
 
@@ -19,19 +19,21 @@ namespace TravelMonkey.ViewModels
         public Destination CurrentDestination
         {
             get => _currentDestination;
-            set => Set(ref _currentDestination, value);
+            set => SetProperty(ref _currentDestination, value);
         }
 
         public Command<string> OpenUrlCommand { get; } = new Command<string>(async (url) =>
         {
-            if (!string.IsNullOrWhiteSpace(url))
-                await Browser.OpenAsync(url, options: new BrowserLaunchOptions
-                {
-                    Flags = BrowserLaunchFlags.PresentAsFormSheet,
-                    PreferredToolbarColor = Color.SteelBlue,
-                    PreferredControlColor = Color.White
-                });
+            //if (!string.IsNullOrWhiteSpace(url))
+            //    await Browser.OpenAsync(url, options: new BrowserLaunchOptions
+            //    {
+            //        Flags = BrowserLaunchFlags.PresentAsFormSheet,
+            //        PreferredToolbarColor = Color.SteelBlue,
+            //        PreferredControlColor = Color.White
+            //    });
+            //TODO implement this in views
         });
+        public string ErrorMessage { get; set; }
 
         public MainPageViewModel()
         {

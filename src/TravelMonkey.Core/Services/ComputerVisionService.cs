@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using TravelMonkey.Models;
-using Xamarin.Forms;
 
 namespace TravelMonkey.Services
 {
@@ -25,7 +24,7 @@ namespace TravelMonkey.Services
                 var description = result.Description.Captions.OrderByDescending(d => d.Confidence).FirstOrDefault()?.Text ?? "nothing! No description found";
 
                 // Get accent color
-                var accentColor = Color.FromHex($"#{result.Color.AccentColor}");
+                var accentColor = $"#{result.Color.AccentColor}";
 
                 // Determine if there are any landmarks to be seen
                 var landmark = result.Categories.FirstOrDefault(c => c.Detail != null && c.Detail.Landmarks.Any());
