@@ -12,6 +12,9 @@ namespace TravelMonkey.Blazor.Pages
     {
         [Inject] NavigationManager NavigationManager { get; set; }
 
+        Carousel TheCarousel;
+
+
         public readonly MainPageViewModel VM = new MainPageViewModel();
         public Index()
         {
@@ -22,36 +25,32 @@ namespace TravelMonkey.Blazor.Pages
         {
             VM.PropertyChanged += VM_PropertyChanged;
             await base.OnInitializedAsync();
-            //VM.IsBusy = true;
             MockDataStore.Destinations = await _bingSearchService.GetDestinations();
-
-            //VM.IsBusy = false;
 
             VM.StartSlideShow();
             StateHasChanged();
         }
 
         public int currentCount;
+        public string URL { get; set; }
 
         private void VM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             currentCount++;
 
-            if(e.PropertyName != "IsBusy")
+            if(e.PropertyName == "CurrentDestination")
             {
-                InvokeAsync(() => {
-                    StateHasChanged();
+                //StateHasChanged();//This doesn't nothing because I'm on background thread
+                InvokeAsync(() =>
+                {
+                    //URL = VM.CurrentDestination.ImageUrl;
+                    Debug.WriteLine($"{URL}");
+                    
+                    StateHasChanged();//Updated image but input loses focus
                 });
+                
             }
 
-            //if(e.PropertyName == "CurrentDestination")
-            //{
-            //    Debug.WriteLine($"{e.PropertyName} {VM.CurrentDestination.Title }");
-            //    StateHasChanged();
-
-            //}
-            //else
-            //    Debug.WriteLine($"{e.PropertyName} ");
 
         }
 

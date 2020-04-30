@@ -1,0 +1,14 @@
+﻿<h3>This should be a carousel</h3>
+<img class="carousel" src="@URL" />
+
+
+@code {
+    [Parameter]
+    public string URL { get; set; }
+
+    public void Update()
+    {
+            StateHasChanged();
+        
+    }
+}

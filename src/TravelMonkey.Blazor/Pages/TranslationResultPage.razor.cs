@@ -7,6 +7,8 @@ namespace TravelMonkey.Blazor.Pages
 {
     public partial class TranslationResultPage : ComponentBase
     {
+        [Inject]
+        NavigationManager NavigationManager { get; set; }
         public TranslateResultPageViewModel VM = new TranslateResultPageViewModel();
         public TranslationResultPage()
         {
@@ -18,11 +20,22 @@ namespace TravelMonkey.Blazor.Pages
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            //VM.InputText = Text;
-
+            VM.InputText = Text;
             await VM.TranslateText(Text);
             StateHasChanged();
 
         }
+
+        public async Task Translate()
+        {
+            await VM.TranslateText(VM.InputText);
+            StateHasChanged();
+        }
+
+        public void Back()
+        {
+            NavigationManager.NavigateTo("/");
+        }
+
     }
 }

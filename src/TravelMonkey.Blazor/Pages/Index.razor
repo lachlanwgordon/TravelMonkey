@@ -6,15 +6,39 @@
 }
 else
 {
-    <h1>Hi there,</h1>
-    <h1>Where do you want to go?</h1>
+    <div class="container">
+        <div class="layer1">
+            <img class="carousel" src="@VM.CurrentDestination.ImageUrl" @key="URL" />
+        </div>
+        <div class="layer2">
 
-    <img class="carousel" src="@VM.CurrentDestination.ImageUrl" />
-    <p>@VM.CurrentDestination.Title</p>
-    <EditForm Model="VM.CurrentDestination">
-        <MatTextField @bind-Value="VM.TranslateText"></MatTextField>
-        <p class="validation-message">@VM.ErrorMessage</p>
-    </EditForm>
-    <MatButton OnClick="Translate">Translate</MatButton>
-    <MatButton OnClick="AddPicture">AddImage</MatButton>
+            <h2 tex>Hi there,</h2>
+            <h2>Where do you want to go?</h2>
+
+            <div class="form-wrapper">
+                    <MatIcon Class="icon"  Icon="translate"></MatIcon>
+
+                <EditForm Class="grow" Model="VM.CurrentDestination" OnSubmit="Translate">
+
+                    <MatTextField Class="field" @bind-Value="VM.TranslateText" FullWidth="true" PlaceHolder="Need to translate something?"></MatTextField>
+
+                </EditForm>
+            </div>
+
+        </div>
+        <div class="carousel-footer-wrapper">
+
+            <div class="carousel-footer">
+
+                <h1>@VM.CurrentDestination.Title</h1>
+                <p>Recommendation</p>
+            </div>
+        </div>
+
+    </div>
+    <h3>Pictures</h3>
+    <MatButton OnClick="AddPicture">Add New</MatButton>
+    <p>No pictures yet, give me your best shots!</p>
+
+
 }

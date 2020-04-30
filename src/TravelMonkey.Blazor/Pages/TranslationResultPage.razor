@@ -1,16 +1,25 @@
 ﻿@page "/translation/{Text}"
 @page "/translation"
 
-<h1>@Text</h1>
+    <div style="height:100vh;        background: rgb(255,255,255);
+        background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(17,133,196,1) 100%);">
 
-@if (VM == null || VM.Translations == null)
-{
-    <p>loading</p>
-}
-else
-{
-    @foreach (var translation in VM.Translations)
-    {
-        <p>@translation.Key : @translation.Value</p>
-    }
-}
+        <MatButton OnClick="Back" >Close</MatButton>
+        @if (VM == null || VM.Translations == null)
+        {
+            <p>loading</p>
+        }
+        else
+        {
+            <EditForm Model="VM" OnSubmit="Translate">
+                <MatTextField @bind-Value="VM.InputText" FullWidth="true" PlaceHolder="Need to translate something?"></MatTextField>
+            </EditForm>
+
+            @foreach (var translation in VM.Translations)
+            {
+                <div class="card">
+                    <p>@translation.Key : @translation.Value</p>
+                </div>
+            }
+        }
+    </div>
