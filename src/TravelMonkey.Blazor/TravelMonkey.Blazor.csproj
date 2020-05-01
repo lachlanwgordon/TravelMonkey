@@ -28,4 +28,7 @@
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\es.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

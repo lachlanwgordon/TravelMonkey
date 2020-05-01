@@ -17,7 +17,7 @@
         {
 
             <div class="card">
-                <div class="flag" style="@($"background-image: url('{translation.Key}.png');")" />
+                <div class="flag" style="@($"background-image: url('images/{translation.Key}.png');")" />
                 <h3 class="country"> @(translation.Key.ToCountryName())</h3>
                 <h3 class="translation"> @translation.Value</h3>
             </div>
