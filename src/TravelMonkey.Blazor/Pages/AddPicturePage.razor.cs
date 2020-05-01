@@ -29,6 +29,7 @@ namespace TravelMonkey.Blazor.Pages
 
             VM.PhotoStream = image.Data;
             await VM.Post();
+            CloseClick();
             StateHasChanged();
         }
 
@@ -37,9 +38,11 @@ namespace TravelMonkey.Blazor.Pages
             NavigationManager.NavigateTo("/");
         }
         
-        public void OkClick()
+        public void CloseClick()
         {
             DialogIsOpen = false;
+            CameraIsOpen = false;
+            UploadIsOpen = false;
         }
 
         public void CameraClick()

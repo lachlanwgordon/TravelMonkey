@@ -25,16 +25,14 @@
                 </MatDialogActions>
             </MatDialog>
             <MatDialog @bind-IsOpen="@CameraIsOpen">
-                <MatDialogTitle>What do you want to do?</MatDialogTitle>
+                <MatDialogTitle>Take photo</MatDialogTitle>
                 <MatDialogContent>
-                    <p>@VM.PictureDescription</p>
+                    <p>Camera not yet implemented</p>
 
-                    <InputFile OnChange="HandleFileSelected" />
-                    <p>@FileName</p>
                 </MatDialogContent>
                 <MatDialogActions>
-                    <MatButton OnClick="@(e => { DialogIsOpen = false; })">No Thanks</MatButton>
-                    <MatButton OnClick="@OkClick">OK</MatButton>
+                    <MatButton OnClick="UploadClick">Choose photo</MatButton>
+                    <MatButton OnClick="@CloseClick">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
             <MatDialog @bind-IsOpen="@UploadIsOpen">
@@ -45,8 +43,7 @@
                     <p>@FileName</p>
                 </MatDialogContent>
                 <MatDialogActions>
-                    <MatButton OnClick="@(e => { DialogIsOpen = false; })">No Thanks</MatButton>
-                    <MatButton OnClick="@OkClick">OK</MatButton>
+                    <MatButton OnClick="CloseClick">Cancel</MatButton>
                 </MatDialogActions>
             </MatDialog>
         }
