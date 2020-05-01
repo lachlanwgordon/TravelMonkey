@@ -1,10 +1,43 @@
 ﻿@page "/addpicture"
+    <div class="background">
+        <MatButton OnClick="Back">Close</MatButton>
+        <div class="page-content">
 
-<h1>Add picture</h1>
+            @if (ViewState == ViewState.none)
+            {
 
-<p class="validation-message">@VM.ErrorMessage</p>
-<h2>@VM.PictureDescription</h2>
+                <div class="frame" @onclick="@AddPicture">
+                    <h3>Tap to add picture</h3>
+                </div>
+                <MatDialog @bind-IsOpen="@dialogIsOpen">
+                    <MatDialogTitle>take a photo?</MatDialogTitle>
+                    <MatDialogContent>
+                        <p>@VM.PictureDescription</p>
 
-<InputFile OnChange="HandleFileSelected" />
-<p>@FileName</p>
+                            <InputFile OnChange="HandleFileSelected" />
+                        <p>@FileName</p>
+                    </MatDialogContent>
+                    <MatDialogActions>
+                        <MatButton OnClick="@(e => { dialogIsOpen = false; })">No Thanks</MatButton>
+                        <MatButton OnClick="@OkClick">OK</MatButton>
+                    </MatDialogActions>
+                </MatDialog>
+            }
+            else if (ViewState == ViewState.alert)
+            {
+                <p>alert</p>
+            }
+            else if (ViewState == ViewState.picker)
+            {
+                <div>
 
+                    <p class="validation-message">@VM.ErrorMessage</p>
+                    <h2>@VM.PictureDescription</h2>
+
+                    <InputFile OnChange="HandleFileSelected" />
+                    <p>@FileName</p>
+                </div>
+            }
+        </div>
+
+    </div>

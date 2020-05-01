@@ -175,7 +175,19 @@ app {
     grid-row: 2;
     background-color: #FFFFFF33;
 }
+.background {
+    height: 100vh;
+    background: rgb(255,255,255);
+    background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(17,133,196,1) 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 
+.page-content {
+    display: flex;
+    justify-content: center;
+}
 .form-wrapper {
     border-radius: 20px;
     background-color: #FFFFFFBB;
@@ -185,15 +197,32 @@ app {
     display: flex;
     align-items: center;
 }
+
+.frame {
+    border-color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    border-width: 2px;
+    width: 500px;
+    height: 300px;
+    border-style: solid;
+}
 .grow {
     flex-grow:1;
+}
+
+.center {
+    margin: auto;
 }
 .icon {
     grid-column: 1;
     padding: 3px;
     align-self: center;
     border-radius: 5px;
-    margin: 5px 0px 0px 0px;
+    margin: 12px 0px 0px 0px;
     background-color: gray;
 }
 .field  {
