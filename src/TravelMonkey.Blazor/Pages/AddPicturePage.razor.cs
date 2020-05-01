@@ -13,7 +13,9 @@ namespace TravelMonkey.Blazor.Pages
         public NavigationManager NavigationManager {get;set;}
         public AddPicturePageViewModel VM { get; set; } = new AddPicturePageViewModel();
         public ViewState ViewState { get; set; }
-        public bool dialogIsOpen { get; set; }
+        public bool DialogIsOpen { get; set; }
+        public bool CameraIsOpen { get; set; }
+        public bool UploadIsOpen { get; set; }
 
         public AddPicturePage()
         {
@@ -37,12 +39,25 @@ namespace TravelMonkey.Blazor.Pages
         
         public void OkClick()
         {
-            dialogIsOpen = false;
+            DialogIsOpen = false;
         }
+
+        public void CameraClick()
+        {
+            DialogIsOpen = false;
+            CameraIsOpen = true;
+        }
+
+        public void UploadClick()
+        {
+            DialogIsOpen = false;
+            UploadIsOpen = true;
+        }
+
 
         public void AddPicture()
         {
-            dialogIsOpen = true;
+            DialogIsOpen = true;
         }
     }
     public enum ViewState

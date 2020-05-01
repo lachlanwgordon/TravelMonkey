@@ -1,43 +1,70 @@
 ﻿@page "/addpicture"
-    <div class="background">
-        <MatButton OnClick="Back">Close</MatButton>
-        <div class="page-content">
+<div class="background">
+    <MatButton OnClick="Back">Close</MatButton>
+    <div class="page-content">
 
-            @if (ViewState == ViewState.none)
-            {
+        @if (ViewState == ViewState.none)
+        {
 
-                <div class="frame" @onclick="@AddPicture">
-                    <h3>Tap to add picture</h3>
-                </div>
-                <MatDialog @bind-IsOpen="@dialogIsOpen">
-                    <MatDialogTitle>take a photo?</MatDialogTitle>
-                    <MatDialogContent>
-                        <p>@VM.PictureDescription</p>
+            <div class="frame" @onclick="@AddPicture">
+                <h3>Tap to add picture</h3>
+            </div>
+            <p>@VM.PictureDescription</p>
+            <MatButton OnClick="AddPicture">ADD PICTURE</MatButton>
 
-                            <InputFile OnChange="HandleFileSelected" />
-                        <p>@FileName</p>
-                    </MatDialogContent>
-                    <MatDialogActions>
-                        <MatButton OnClick="@(e => { dialogIsOpen = false; })">No Thanks</MatButton>
-                        <MatButton OnClick="@OkClick">OK</MatButton>
-                    </MatDialogActions>
-                </MatDialog>
-            }
-            else if (ViewState == ViewState.alert)
-            {
-                <p>alert</p>
-            }
-            else if (ViewState == ViewState.picker)
-            {
-                <div>
 
-                    <p class="validation-message">@VM.ErrorMessage</p>
-                    <h2>@VM.PictureDescription</h2>
+            <MatDialog @bind-IsOpen="@DialogIsOpen">
+                <MatDialogTitle>What do you want to do?</MatDialogTitle>
+                <MatDialogContent>
+                    <MatButton OnClick="CameraClick">Take photo</MatButton>
+                    <MatButton OnClick="UploadClick">Choose photo</MatButton>
+                    <p>@FileName</p>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { DialogIsOpen = false; })">Cancel</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+            <MatDialog @bind-IsOpen="@CameraIsOpen">
+                <MatDialogTitle>What do you want to do?</MatDialogTitle>
+                <MatDialogContent>
+                    <p>@VM.PictureDescription</p>
 
                     <InputFile OnChange="HandleFileSelected" />
                     <p>@FileName</p>
-                </div>
-            }
-        </div>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { DialogIsOpen = false; })">No Thanks</MatButton>
+                    <MatButton OnClick="@OkClick">OK</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+            <MatDialog @bind-IsOpen="@UploadIsOpen">
+                <MatDialogTitle>Add a photo</MatDialogTitle>
+                <MatDialogContent>
 
+                    <InputFile OnChange="HandleFileSelected" />
+                    <p>@FileName</p>
+                </MatDialogContent>
+                <MatDialogActions>
+                    <MatButton OnClick="@(e => { DialogIsOpen = false; })">No Thanks</MatButton>
+                    <MatButton OnClick="@OkClick">OK</MatButton>
+                </MatDialogActions>
+            </MatDialog>
+        }
+        else if (ViewState == ViewState.camera)
+        {
+            <p>alert</p>
+        }
+        else if (ViewState == ViewState.picker)
+        {
+            <div>
+
+                <p class="validation-message">@VM.ErrorMessage</p>
+                <h2>@VM.PictureDescription</h2>
+
+                <InputFile OnChange="HandleFileSelected" />
+                <p>@FileName</p>
+            </div>
+        }
     </div>
+
+</div>
