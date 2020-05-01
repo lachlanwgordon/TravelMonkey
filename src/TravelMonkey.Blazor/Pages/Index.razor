@@ -1,8 +1,8 @@
 ﻿@page "/"
 
-@if (VM.CurrentDestination == null)
+@if (VM.CurrentDestination == null || PretendingToLoad)
 {
-    <p>loading this should be a monkey</p>
+    <img src="images/TravelMonkey.png" class="animated infinite pulse center" />
 }
 else
 {

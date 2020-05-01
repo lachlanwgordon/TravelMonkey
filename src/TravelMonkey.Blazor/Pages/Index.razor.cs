@@ -13,7 +13,7 @@ namespace TravelMonkey.Blazor.Pages
         [Inject] NavigationManager NavigationManager { get; set; }
 
         Carousel TheCarousel;
-
+        public bool PretendingToLoad { get; set; } = true;
 
         public readonly MainPageViewModel VM = new MainPageViewModel();
         public Index()
@@ -28,6 +28,8 @@ namespace TravelMonkey.Blazor.Pages
             MockDataStore.Destinations = await _bingSearchService.GetDestinations();
 
             VM.StartSlideShow();
+            await Task.Delay(2000);
+            PretendingToLoad = false;
             StateHasChanged();
         }
 
