@@ -13,4 +13,18 @@
     <PackageReference Include="MatBlazor" Version="2.3.0" />
     <PackageReference Include="BlazorInputFile" Version="0.2.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\en.png" />
+    <Content Remove="wwwroot\es.png" />
+    <Content Remove="wwwroot\fr.png" />
+    <Content Remove="wwwroot\nl.png" />
+    <Content Remove="wwwroot\TravelMonkey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="wwwroot\en.png" />
+    <BundleResource Include="wwwroot\es.png" />
+    <BundleResource Include="wwwroot\fr.png" />
+    <BundleResource Include="wwwroot\nl.png" />
+    <BundleResource Include="wwwroot\TravelMonkey.png" />
+  </ItemGroup>
 </Project>

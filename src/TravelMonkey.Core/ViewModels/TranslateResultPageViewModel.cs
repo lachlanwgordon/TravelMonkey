@@ -24,7 +24,7 @@ namespace TravelMonkey.ViewModels
 
                 SetProperty(ref _inputText, value);
 
-                //TranslateText(value);
+                TranslateText(value);
             }
         }
 

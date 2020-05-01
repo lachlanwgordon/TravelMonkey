@@ -182,6 +182,7 @@ app {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 20px;
 }
 
 .page-content {
@@ -233,7 +234,27 @@ app {
     border-radius: 40px;
     padding: 20px;
     background-color: #FFFFFF;
-    margin: 20px;
+    margin: 20px 0px;
+    display: grid;
+    grid-template-areas: "flag country country country country country" "flag translation translation translation translation translation"
+}
+
+.flag {
+    height: 100%;
+    background-size: contain; /* <-- background size */
+    background-position: center; /* <-- background position */
+    grid-area: flag;
+    background-repeat: no-repeat;
+}
+
+.country {
+    padding-left: 10px;
+    grid-area: country;
+}
+
+.translation {
+    padding-left: 10px;
+    grid-area: translation;
 }
 
 #blazor-error-ui {

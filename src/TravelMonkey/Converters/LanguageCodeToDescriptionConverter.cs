@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using TravelMonkey.Core.Converters;
 using Xamarin.Forms;
 
 namespace TravelMonkey.Converters
@@ -8,15 +9,7 @@ namespace TravelMonkey.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (string.IsNullOrWhiteSpace(value as string))
-                return "";
-
-            var cultureInfo = new CultureInfo((string)value);
-
-            if (cultureInfo == null)
-                return "";
-
-            return cultureInfo.DisplayName;
+            return ((string)value).ToCountryName();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
