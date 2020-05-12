@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
@@ -36,7 +37,7 @@ namespace TravelMonkey.Services
                 // Wrap in our result object and send along
                 return new AddPictureResult(description, accentColor, landmarkDescription);
             }
-            catch
+            catch (Exception ex)
             {
                 return new AddPictureResult();
             }

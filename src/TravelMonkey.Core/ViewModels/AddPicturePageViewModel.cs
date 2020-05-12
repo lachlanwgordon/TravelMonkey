@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
+using TravelMonkey.Core.Helpers;
 //using Acr.UserDialogs;
 //using Plugin.Media;
 //using Plugin.Media.Abstractions;
@@ -23,7 +24,19 @@ namespace TravelMonkey.ViewModels
 
         //MediaFile _photo;
         //StreamImageSource _photoSource;
-        public Stream PhotoStream { get; set; }
+        //Stream photoStream;
+        //public Stream PhotoStream
+        //{
+        //    get => photoStream;
+        //    set => SetProperty(ref photoStream, value);
+        //}
+
+        byte[] photoBytes;
+        public byte[] PhotoBytes
+        {
+            get => photoBytes;
+            set => SetProperty(ref photoBytes, value);
+        }
         //public StreamImageSource PhotoSource
         //{
         //    get => _photoSource;
@@ -64,7 +77,6 @@ namespace TravelMonkey.ViewModels
 
         public AddPicturePageViewModel()
         {
-            TakePhotoCommand = new Command(async () => await TakePhoto());
             AddPictureCommand = new Command(() =>
             {
                 AddPicture();
@@ -73,43 +85,22 @@ namespace TravelMonkey.ViewModels
 
         public void AddPicture()
         {
-            MockDataStore.Pictures.Add(new PictureEntry { Description = _pictureDescription, ImageUrl = "todo" });
+            MockDataStore.Pictures.Add(new PictureEntry { Description = _pictureDescription, PhotoBytes = PhotoBytes });
             //MessagingCenter.Send(this, Constants.PictureAddedMessage);TODO what was this for
         }
 
-        private async Task TakePhoto()
+        string errorMessage;
+        public string ErrorMessage
         {
-            //TODO move to view
-            //var result = await UserDialogs.Instance.ActionSheetAsync("What do you want to do?",
-            //    "Cancel", null, null, "Take photo", "Choose photo");
-
-            //if (result.Equals("Take photo"))
-            //{
-            //    _photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions { PhotoSize = PhotoSize.Small });
-
-            //    PhotoSource = (StreamImageSource)ImageSource.FromStream(() => _photo.GetStream());
-            //}
-            //else if (result.Equals("Choose photo"))
-            //{
-            //    _photo = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions { PhotoSize = PhotoSize.Small });
-
-            //    PhotoSource = (StreamImageSource)ImageSource.FromStream(() => _photo.GetStream());
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            //if (_photo != null)
-            //    await Post();
+            get => errorMessage;
+            set => SetProperty(ref errorMessage, value);
         }
-        public string ErrorMessage { get; set; }
+
         public async Task Post()
         {
-            if (PhotoStream == null)
+            if (PhotoBytes == null || PhotoBytes.Length == 0)
             {
                 ErrorMessage = "Please select an image";
-                //await UserDialogs.Instance.AlertAsync("Please select an image first", "No image selected");
                 return;
             }
 
@@ -117,12 +108,13 @@ namespace TravelMonkey.ViewModels
 
             try
             {
-                //var pictureStream = _photo.GetStreamWithImageRotatedForExternalStorage();
-                var result = await _computerVisionService.AddPicture(PhotoStream);
+                var stream = await photoBytes.ToStream();
+
+                var result = await _computerVisionService.AddPicture(stream);
 
                 if (!result.Succeeded)
                 {
-                    //MessagingCenter.Send(this, Constants.PictureFailedMessage);//TODO what does this do
+                    ErrorMessage = "Can you hand me my glasses? Something went wrong while analyzing this image";
                     return;
                 }
 

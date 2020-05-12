@@ -88,7 +88,7 @@
                             <Grid Padding="10,0">
                                 <yummy:PancakeView HeightRequest="120" WidthRequest="200" IsClippedToBounds="true" CornerRadius="12">
                                     <Grid>
-                                        <Image Aspect="AspectFill" Source="{Binding Image}" />
+                                        <Image Aspect="AspectFill" Source="{Binding PhotoBytes, Converter={StaticResource bytesToImageSourceConverter}}" />
                                         <yummy:PancakeView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientStartColor="Transparent" BackgroundGradientEndColor="#222" />
                                         <StackLayout Spacing="0" Margin="12" VerticalOptions="EndAndExpand">
                                             <Label FontSize="16" FontFamily="LatoBold" TextColor="#fff" Text="{Binding Description}" />
