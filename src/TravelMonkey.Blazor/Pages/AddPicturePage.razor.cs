@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BlazorInputFile;
 using Microsoft.AspNetCore.Components;
 using TravelMonkey.ViewModels;
+using TravelMonkey.Core.Helpers;
 
 namespace TravelMonkey.Blazor.Pages
 {
@@ -27,7 +28,8 @@ namespace TravelMonkey.Blazor.Pages
             var image = files.FirstOrDefault();
             FileName = image.Name;
 
-            VM.PhotoStream = image.Data;
+
+            VM.PhotoBytes = await image.Data.ToByteArray();
             await VM.Post();
             CloseClick();
             StateHasChanged();

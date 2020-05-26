@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace TravelMonkey.Services
                 var accentColor = $"#{result.Color.AccentColor}";
 
                 // Determine if there are any landmarks to be seen
-                var landmark = result.Categories.FirstOrDefault(c => c.Detail != null && c.Detail.Landmarks.Any());
+                var landmark = result.Categories.FirstOrDefault(c => c.Detail != null && c.Detail.Landmarks != null && c.Detail.Landmarks.Any());
 
                 var landmarkDescription = "";
 
@@ -37,8 +38,10 @@ namespace TravelMonkey.Services
                 // Wrap in our result object and send along
                 return new AddPictureResult(description, accentColor, landmarkDescription);
             }
+
             catch (Exception ex)
             {
+                Debug.WriteLine($"Add photo error {ex} {ex.StackTrace}");
                 return new AddPictureResult();
             }
         }
