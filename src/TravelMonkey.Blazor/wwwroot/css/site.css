@@ -8,6 +8,7 @@ a, .btn-link {
     color: #0366d6;
 }
 
+
 h2 {
     color: white;
 }
@@ -27,6 +28,12 @@ app {
     height: 3.5rem;
     display: flex;
     align-items: center;
+}
+
+.overlap-content {
+    position:absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .main {
@@ -142,6 +149,47 @@ app {
     grid-template-rows: 70% 30%; 
     max-width: 10000px;
 }
+.frame {
+    border-color: white;
+    border-radius: 5px;
+    display: grid;
+    border-width: 2px;
+    width: 500px;
+    height: 80vh;
+    border-style: solid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 50px auto;
+}
+.card-view {
+    background-image: linear-gradient(180deg, rgba(128,128,128,0), rgba(128,128,128,0.8) );
+    border-color: white;
+    border-radius: 5px;
+    display: grid;
+    border-width: 2px;
+    width: 300px;
+    height: 200px;
+    border-style: solid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto 50px;
+    border-radius: 20px;
+}
+
+.overlap-image {
+    grid-column: 1;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.overlap-text {
+    grid-column: 1;
+    grid-row: 2;
+    text-align:center;
+    color: white;
+}
 
 .layer1, .layer2, carousel-footer {
     grid-column: 1;
@@ -177,7 +225,6 @@ app {
 }
 .background {
     height: 100vh;
-    background: rgb(255,255,255);
     background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(17,133,196,1) 100%);
     display: flex;
     justify-content: center;
@@ -199,18 +246,7 @@ app {
     align-items: center;
 }
 
-.frame {
-    border-color: white;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    border-width: 2px;
-    width: 500px;
-    height: 300px;
-    border-style: solid;
-}
+
 .grow {
     flex-grow:1;
 }

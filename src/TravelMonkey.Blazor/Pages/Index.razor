@@ -16,7 +16,7 @@ else
             <h2>Where do you want to go?</h2>
 
             <div class="form-wrapper">
-                    <MatIcon Class="icon"  Icon="translate"></MatIcon>
+                <MatIcon Class="icon" Icon="translate"></MatIcon>
 
                 <EditForm Class="grow" Model="VM.CurrentDestination" OnSubmit="Translate">
 
@@ -39,6 +39,15 @@ else
     <h3>Pictures</h3>
     <MatButton OnClick="AddPicture">Add New</MatButton>
     <p>No pictures yet, give me your best shots!</p>
+    @foreach (var picture in VM.Pictures)
+    {
+        <div class="card-view">
+            <img class="overlap-image" src="@(picture.PhotoBytes == null ? "" : $"data:image/jpg;base64,{Convert.ToBase64String(picture.PhotoBytes)}")" />
+            <div class="card-view overlap-image" ></div>
+            <p class="overlap-text" style="grid-row: 3;">@picture.Description</p>
+
+        </div>
+    }
 
 
 }

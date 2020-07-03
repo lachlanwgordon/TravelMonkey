@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="MatBlazor" Version="2.3.0" />
     <PackageReference Include="BlazorInputFile" Version="0.2.0" />
+    <PackageReference Include="BlazorMedia" Version="0.2.333.326" />
   </ItemGroup>
 
   <ItemGroup>

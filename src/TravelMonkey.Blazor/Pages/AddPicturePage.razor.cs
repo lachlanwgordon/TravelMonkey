@@ -5,6 +5,7 @@ using BlazorInputFile;
 using Microsoft.AspNetCore.Components;
 using TravelMonkey.ViewModels;
 using TravelMonkey.Core.Helpers;
+using System.Diagnostics;
 
 namespace TravelMonkey.Blazor.Pages
 {
@@ -17,6 +18,10 @@ namespace TravelMonkey.Blazor.Pages
         public bool DialogIsOpen { get; set; }
         public bool CameraIsOpen { get; set; }
         public bool UploadIsOpen { get; set; }
+
+        public string BackgroundGradient =>
+            $"background: linear-gradient(45deg, rgba(255,255,255,1) 0%, {VM.PictureAccentColor} 100%)";
+
 
         public AddPicturePage()
         {
@@ -60,9 +65,19 @@ namespace TravelMonkey.Blazor.Pages
         }
 
 
+        public void SavePicture()
+        {
+            VM.AddPicture();
+        }
+
         public void AddPicture()
         {
             DialogIsOpen = true;
+        }
+
+        protected void OnDataReceived(byte[] data)
+        {
+            Debug.WriteLine($"Data Recieved of length: {data.Length}");
         }
     }
     public enum ViewState

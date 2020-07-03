@@ -28,7 +28,7 @@ namespace TravelMonkey.ViewModels
             get => _isPosting;
             set => SetProperty(ref _isPosting, value);
         }
-        private string _pictureAccentColor = "#2222bb";//   .ToString();//TODO check if generates hex
+        private string _pictureAccentColor = "#2222bb";
         public string PictureAccentColor
         {
             get => _pictureAccentColor;
