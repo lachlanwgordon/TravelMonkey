@@ -1,0 +1,26 @@
+﻿@page "/translation/{Text}"
+@page "/translation"
+<div class="background">
+
+    <MatButton OnClick="Back">Close</MatButton>
+    @if (VM == null || VM.Translations == null)
+    {
+        <p>loading</p>
+    }
+    else
+    {
+        <EditForm Model="VM" OnSubmit="Translate">
+            <MatTextField @bind-Value="VM.InputText" FullWidth="true" PlaceHolder="Need to translate something?"></MatTextField>
+        </EditForm>
+
+        @foreach (var translation in VM.Translations)
+        {
+
+            <div class="card">
+                <div class="flag" style="@($"background-image: url('images/{translation.Key}.png');")" />
+                <h3 class="country"> @(translation.Key.ToCountryName())</h3>
+                <h3 class="translation"> @translation.Value</h3>
+            </div>
+        }
+    }
+</div>

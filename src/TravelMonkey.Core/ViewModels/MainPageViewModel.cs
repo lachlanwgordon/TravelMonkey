@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Timers;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
@@ -37,12 +38,17 @@ namespace TravelMonkey.ViewModels
 
         public MainPageViewModel()
         {
+        }
+
+        public void StartSlideShow()
+        {
             if (Destinations.Count > 0)
             {
                 CurrentDestination = Destinations[0];
 
                 _slideShowTimer.Elapsed += (o, a) =>
                 {
+
                     var currentIdx = Destinations.IndexOf(CurrentDestination);
 
                     if (currentIdx == Destinations.Count - 1)
@@ -51,10 +57,7 @@ namespace TravelMonkey.ViewModels
                         CurrentDestination = Destinations[currentIdx + 1];
                 };
             }
-        }
 
-        public void StartSlideShow()
-        {
             _slideShowTimer.Start();
             
         }

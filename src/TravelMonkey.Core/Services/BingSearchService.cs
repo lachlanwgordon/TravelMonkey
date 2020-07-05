@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Search.ImageSearch;
 using TravelMonkey.Models;
@@ -16,6 +17,7 @@ namespace TravelMonkey.Services
 
             try
             {
+                Debug.WriteLine(ApiKeys.BingImageSearch);
                 var client = new ImageSearchClient(new ApiKeyServiceClientCredentials(ApiKeys.BingImageSearch));
 
                 var resultDestinations = new List<Destination>();
@@ -36,8 +38,9 @@ namespace TravelMonkey.Services
 
                 return resultDestinations;
             }
-            catch
+            catch(Exception ex)
             {
+                Debug.WriteLine($"Failed to load {ex}");
                 return new List<Destination> {
                     new Destination
                     {

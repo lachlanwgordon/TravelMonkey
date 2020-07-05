@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using TravelMonkey.Data;
 using TravelMonkey.Services;
 using TravelMonkey.ViewModels;
+using Microsoft.JSInterop;
 
-namespace TravelMonkey.Blazor.Pages
+namespace TravelMonkey.Blazor.WASM.Pages
 {
-    public partial class Index : ComponentBase
+    public partial class Index
     {
         [Inject] NavigationManager NavigationManager { get; set; }
-
-        public bool PretendingToLoad { get; set; } = true;
+        [Inject] IJSRuntime JSRuntime { get; set; }
 
         public readonly MainPageViewModel VM = new MainPageViewModel();
         public Index()
@@ -27,29 +29,23 @@ namespace TravelMonkey.Blazor.Pages
             MockDataStore.Destinations = await _bingSearchService.GetDestinations();
 
             VM.StartSlideShow();
-            await Task.Delay(2000);
-            PretendingToLoad = false;
             StateHasChanged();
         }
 
-        public int currentCount;
-        public string URL { get; set; }
-
         private void VM_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            currentCount++;
-
-            if(e.PropertyName == "CurrentDestination")
+            if (e.PropertyName == "CurrentDestination")
             {
-                //StateHasChanged();//This doesn't nothing because I'm on background thread
                 InvokeAsync(() =>
                 {
-                    //URL = VM.CurrentDestination.ImageUrl;
-                    Debug.WriteLine($"{URL}");
-                    
-                    StateHasChanged();//Updated image but input loses focus
+                    //This JS interop is a pain but StateHasChanged Doesn't work here
+                    JSRuntime.InvokeVoidAsync("setImage", VM.CurrentDestination.ImageUrl);
+                    JSRuntime.InvokeVoidAsync("setDestinationTitle", VM.CurrentDestination.Title);
+
+                    //Don't call StateHasChanged, it will cause input to lose focus if server side or throw as error if WASM
+                    //StateHasChanged();//Updated image but input loses focus
                 });
-                
+
             }
 
 
@@ -57,7 +53,8 @@ namespace TravelMonkey.Blazor.Pages
 
         public void Translate()
         {
-            if(string.IsNullOrEmpty(VM.TranslateText))
+            Debug.WriteLine("ABOUT TO TRANSLATE");
+            if (string.IsNullOrEmpty(VM.TranslateText))
             {
                 VM.ErrorMessage = "You didn't enter any text!";
                 return;
@@ -67,7 +64,7 @@ namespace TravelMonkey.Blazor.Pages
 
         public void AddPicture()
         {
-            
+
             NavigationManager.NavigateTo($"/addpicture");
         }
 
