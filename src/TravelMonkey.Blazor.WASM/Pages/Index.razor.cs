@@ -39,8 +39,8 @@ namespace TravelMonkey.Blazor.WASM.Pages
                 InvokeAsync(() =>
                 {
                     //This JS interop is a pain but StateHasChanged Doesn't work here
-                    JSRuntime.InvokeVoidAsync("setImage", VM.CurrentDestination.ImageUrl);
-                    JSRuntime.InvokeVoidAsync("setDestinationTitle", VM.CurrentDestination.Title);
+                    //JSRuntime.InvokeVoidAsync("setImage", VM.CurrentDestination.ImageUrl);
+                    JSRuntime.InvokeVoidAsync("setDestination",VM.CurrentDestination.ImageUrl, VM.CurrentDestination.Title);
 
                     //Don't call StateHasChanged, it will cause input to lose focus if server side or throw as error if WASM
                     //StateHasChanged();//Updated image but input loses focus

@@ -28,6 +28,7 @@ namespace TravelMonkey.Views
             var result = await UserDialogs.Instance.ActionSheetAsync("What do you want to do?",
                 "Cancel", null, null, "Take photo", "Choose photo");
 
+
             MediaFile photo;
             if (result.Equals("Take photo"))
             {
@@ -44,6 +45,11 @@ namespace TravelMonkey.Views
 
             if (photo != null)
             {
+                var stream = photo.GetStream();
+                byte[] bytes;
+                bytes = new byte[stream.Length];
+                await stream.ReadAsync(bytes, 0, (int)stream.Length);
+
                 var pictureStream = photo.GetStreamWithImageRotatedForExternalStorage();
 
                 VM.PhotoBytes = await pictureStream.ToByteArray();

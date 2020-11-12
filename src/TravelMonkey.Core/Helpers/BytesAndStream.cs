@@ -20,5 +20,10 @@ namespace TravelMonkey.Core.Helpers
             return stream;
         }
 
+        public static string ToHTMLString(this byte[]bytes)
+        {
+            return $"data:image/jpg;base64,{Convert.ToBase64String(bytes)}";
+        }
+
     }
 }

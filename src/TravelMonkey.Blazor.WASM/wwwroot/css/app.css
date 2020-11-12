@@ -238,6 +238,7 @@ app {
     background-color: #FFFFFFBB;
     padding: 50px;
     border-radius: 20px 0px 100px 0px;
+    height: 100%;
 }
 
 .carousel-footer-wrapper {

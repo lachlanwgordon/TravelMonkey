@@ -10,12 +10,11 @@ using BlazorMedia;
 
 namespace TravelMonkey.Blazor.WASM.Pages
 {
-    public partial class AddPicturePage 
+    public partial class AddPicturePage : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         public AddPicturePageViewModel VM { get; set; } = new AddPicturePageViewModel();
-        public ViewState ViewState { get; set; }
         public bool DialogIsOpen { get; set; }
         public bool CameraIsOpen { get; set; }
         public bool UploadIsOpen { get; set; }
@@ -23,18 +22,11 @@ namespace TravelMonkey.Blazor.WASM.Pages
         public string BackgroundGradient =>
             $"background: linear-gradient(45deg, rgba(255,255,255,1) 0%, {VM.PictureAccentColor} 100%)";
 
-
-        public AddPicturePage()
-        {
-        }
         public string FileName { get; set; }
         async Task HandleFileSelected(IFileListEntry[] files)
         {
-            // Do something with the files, e.g., read them
             var image = files.FirstOrDefault();
             FileName = image.Name;
-
-
             VM.PhotoBytes = await image.Data.ToByteArray();
             await VM.Post();
             CloseClick();
@@ -65,7 +57,6 @@ namespace TravelMonkey.Blazor.WASM.Pages
             UploadIsOpen = true;
         }
 
-
         public void SavePicture()
         {
             VM.AddPicture();
@@ -78,20 +69,15 @@ namespace TravelMonkey.Blazor.WASM.Pages
 
         public async Task TakePhotoClick()
         {
-            Debug.WriteLine($"take phoo");
             var base64Image = await TheVideoElement.CaptureImageAsync();
 
-            Debug.WriteLine($"got base 64");
-            Debug.WriteLine(base64Image);
             var cleaned = base64Image.Split(',')[1];
-            Debug.WriteLine("cleaned");
-            Debug.WriteLine(cleaned);
             try
             {
                 var bytes = Convert.FromBase64String(cleaned);
-                Debug.WriteLine($"got bytes ");
-                Debug.WriteLine($"bytes : {bytes}");
                 VM.PhotoBytes = bytes;
+                CloseClick();
+                StateHasChanged();
                 await VM.Post();
                 Debug.WriteLine("posted");
                 
@@ -100,8 +86,8 @@ namespace TravelMonkey.Blazor.WASM.Pages
             {
                 Debug.WriteLine($"Error converting {ex}\n{ex.StackTrace}");
             }
-            CloseClick();
             StateHasChanged();
+
         }
 
         VideoMedia TheVideoElement { get; set; }
@@ -109,13 +95,5 @@ namespace TravelMonkey.Blazor.WASM.Pages
         {
             Debug.WriteLine($"Data Recieved of length: {data.Length}");
         }
-    }
-    public enum ViewState
-    {
-        none = 0,
-        alert = 1,
-        camera = 2,
-        picker = 3
-
     }
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMonkey.Blazor", "Trav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelMonkey.Blazor.WASM", "TravelMonkey.Blazor.WASM\TravelMonkey.Blazor.WASM.csproj", "{4A3C53F3-A797-4FF0-8CBF-D6A4043AF582}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Essentials.Blazor", "Xamarin.Essentials.Blazor\Xamarin.Essentials.Blazor.csproj", "{06729E80-1333-4D6B-A4C3-92F54260B5D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,5 +97,17 @@ Global
 		{4A3C53F3-A797-4FF0-8CBF-D6A4043AF582}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{4A3C53F3-A797-4FF0-8CBF-D6A4043AF582}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{4A3C53F3-A797-4FF0-8CBF-D6A4043AF582}.Release|iPhone.Build.0 = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{06729E80-1333-4D6B-A4C3-92F54260B5D7}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

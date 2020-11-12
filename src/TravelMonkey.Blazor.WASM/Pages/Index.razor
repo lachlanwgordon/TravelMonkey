@@ -16,15 +16,12 @@ else
 
             <h2 tex>Hi there,</h2>
             <h2>Where do you want to go?</h2>
-
             <div class="form-wrapper">
                 <MatIcon Class="icon" Icon="translate"></MatIcon>
-
                 <EditForm Class="grow" Model="VM.CurrentDestination" OnSubmit="Translate">
                     <MatTextField Class="field" @bind-Value="VM.TranslateText" FullWidth="true" PlaceHolder="Need to translate something?"></MatTextField>
                 </EditForm>
             </div>
-
         </div>
         <div class="carousel-footer-wrapper">
 
@@ -34,7 +31,6 @@ else
                 <p>Recommendation</p>
             </div>
         </div>
-
     </div>
     <h3>Pictures</h3>
     <MatButton OnClick="AddPicture">Add New</MatButton>
@@ -45,9 +41,6 @@ else
             <img class="overlap-image" src="@(picture.PhotoBytes == null ? "" : $"data:image/jpg;base64,{Convert.ToBase64String(picture.PhotoBytes)}")" />
             <div class="card-view overlap-image" ></div>
             <p class="overlap-text" style="grid-row: 3;">@picture.Description</p>
-
         </div>
     }
-
-
 }
